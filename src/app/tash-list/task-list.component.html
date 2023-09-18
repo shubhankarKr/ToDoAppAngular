@@ -1,8 +1,0 @@
-<h1>Task List</h1>
-<ul *ngFor="let task of taskList">
-    <li>{{task.title}} <span><button class="btn btn-warning" (click)= "deleteTask(task.id)" type="button">Delete</button></span></li> 
-    <ul>
-        <li>{{task.desciption }}</li>
-        <li>{{task.createdDate | date}}</li>
-    </ul>
-</ul>

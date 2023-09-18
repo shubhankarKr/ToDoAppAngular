@@ -1,0 +1,17 @@
+<div class="d-flex flex-column flex-sm-row flex-wrap justify-content-start gap-2" >
+    <div class="card" *ngFor="let task of taskList" style="width: 15rem;">
+        <div class="card-header">
+            Created on : {{task.createdDate | date}}
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">{{task.title}}</h5>
+            <p class="card-text">{{task.desciption}}</p>
+            <!-- <p class="card-text"> {{task.createdDate | date}}</p> -->
+            <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+            <div class="d-flex justify-content-between">
+              <a class="btn btn-warning"  (click)="deleteTask(task.id)">Delete </a>
+              <a class="btn btn-primary">Update</a>
+            </div>
+          </div>
+    </div>
+</div>

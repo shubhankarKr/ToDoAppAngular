@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { TasKListComponent } from './tash-list/task-list.component';
+import { TasKListComponent } from './task-list/task-list.component';
 import { Router } from '@angular/router';
 
 @Component({
@@ -8,16 +8,14 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.css'],
   providers: [TasKListComponent]
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   title = 'ToDoList';
-  constructor(private taskListComp:TasKListComponent,private router:Router){}
-  ngOnInit(): void {
-      
-  }
-  filter(inputString:string){
-    console.log(' filter called '+inputString);
-    this.router.navigate(['']);
-   this.taskListComp.filterTaskList(inputString);
+  constructor(private taskListComp:TasKListComponent){}
 
+  filter(inputString:string){
+  console.log(' filter called '+inputString);
+  if(inputString){
+    this.taskListComp.filterTaskList(inputString);
+  }
   }
 }

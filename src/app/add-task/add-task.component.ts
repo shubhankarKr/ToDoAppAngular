@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ToDoService } from '../service/to-do.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { toDoTaskModel } from '../model/ToDoTaskModel';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-task',
@@ -9,14 +10,10 @@ import { toDoTaskModel } from '../model/ToDoTaskModel';
   styleUrls: ['./add-task.component.css']
 })
 export class AddTaskComponent {
-  constructor(private service:ToDoService,private fb:FormBuilder){}
+  constructor(private service:ToDoService,private fb:FormBuilder,private router:Router){}
 
   addTaskForm!:FormGroup
-  inputString!:toDoTaskModel;
-  edit:boolean=false;
-  valueToEdit!:toDoTaskModel;
-  addtaskFlag:boolean=false;
-  addTaskButton:boolean=true;
+
   modelToSave!:toDoTaskModel;
   response!:toDoTaskModel;
   toToListArray:toDoTaskModel[]=[];
@@ -27,11 +24,6 @@ export class AddTaskComponent {
     });
   }
 
-  addTask(){
-    this.addtaskFlag=!this.addtaskFlag;
-    this.addTaskButton=!this.addTaskButton;
-    
-  }
 
   saveTask(){
     console.log(' title log '+this.addTaskForm.get('title')?.value);
@@ -39,10 +31,7 @@ export class AddTaskComponent {
     this.service.addTask(this.modelToSave).subscribe({
       next :res=> {
         this.response=res 
-        console.log(' response '+JSON.stringify(res));
-        this.addtaskFlag=!this.addtaskFlag;
-        this.addTaskButton=!this.addTaskButton;
-    
+        this.router.navigate(['/home'])
       }
     });
   }

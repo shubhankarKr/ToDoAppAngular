@@ -17,6 +17,7 @@ export class TasKListComponent implements OnInit{
   }
 
   taskList:toDoTaskModel[]=[]
+  
   getTaskList(){
     this.service.getAllTask().subscribe({
       next : res=>{
@@ -35,13 +36,22 @@ export class TasKListComponent implements OnInit{
     });
   }
 
-  filterTaskList(title:string):void{
-    console.log(' filterTaskList '+title);
-    this.service.searchTask(title).subscribe({
+  filterTaskList(data:string){
+    this.service.searchTask(data).subscribe({
       next : res=>{
-        console.log('filterTaskList called res '+res.length);
+        console.log('filterTaskList called '+res.length);
         this.taskList=res;       
       }
     });
   }
+
+  // filterTaskList(title:string):void{
+  //   console.log(' filterTaskList '+title);
+  //   this.service.searchTask(title).subscribe({
+  //     next : res=>{
+  //       console.log('filterTaskList called res '+res.length);
+  //       this.taskList=res;       
+  //     }
+  //   });
+  // }
 }
