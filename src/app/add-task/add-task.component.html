@@ -1,0 +1,23 @@
+<div class="container">
+    <div class="row row-cols-sm-12 row-cols-md-4" >
+      <div class="mx-auto">
+          <form [formGroup]="addTaskForm">
+            <div class="form-group">
+              <label for="title">Title</label>
+              <input type="text" class="form-control" formControlName="title" placeholder="Enter Title">
+            </div>
+            <div class="form-group">
+              <label for="description">Title</label>
+              <input type="text" class="form-control" formControlName="description" placeholder="Enter Description">
+            </div>
+            <div class="form-group">
+              <button type="submit" (click)="saveTask()" class="btn btn-success">Save</button>
+            </div>
+          </form>
+      <!-- <button type="submit" class="btn btn-success" *ngIf="addTaskButton" (click)="addTask()">Add Task</button> -->
+      <div *ngIf="response" class="text-success">
+         Task has been successfully with task id : {{response.id}}
+       </div>
+      </div>
+    </div>
+  </div>
