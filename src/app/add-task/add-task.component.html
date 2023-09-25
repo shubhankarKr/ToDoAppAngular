@@ -1,19 +1,14 @@
-<div class="container">
-    <!-- <div class="row row-cols-sm-12 row-cols-md-3" >
-      <div class="mx-auto"> -->
-          <form class="row  mx-auto g-3" [formGroup]="addTaskForm">
-            <div class="col-12">
-              <label for="title" class="form-label">Title</label>
-              <input type="text" class="form-control" id="title" formControlName="title" placeholder="Enter Title">
-            </div>
-            <div class="col-12">
-              <label for="description" class="form-label">Desciption</label>
-              <input type="text" class="form-control" id="description" formControlName="description" placeholder="Enter Description">
-            </div>  
-            <div class="col-12">
-              <button type="submit" class="form-control" (click)="saveTask()" id="submit" class="btn btn-success">Save</button>
-            </div>
-          </form>
-      <!-- </div>
-    </div> -->
+<form class="col-sm-12 col-md-6  mx-auto" [formGroup]="addTaskForm">
+  <div class="mb-3">
+    <label for="title" class="form-label">Title</label>
+    <input type="text" class="form-control" id="title" formControlName="title" placeholder="Enter Title">
   </div>
+  <div class="mb-3">
+    <label for="description" class="form-label">Description</label>
+    <input type="text" class="form-control" id="description" formControlName="description" placeholder="Enter Description">
+  </div>    
+  <div class="mb-3">
+    <button type="submit" class="form-control" (click)="saveTask()" *ngIf="edit!=true" id="submit" class="btn btn-success">Save</button>
+    <button type="submit" class="form-control" (click)="updateTask()" *ngIf="edit == true" id="submit" class="btn btn-success">Update</button>
+  </div>
+</form>

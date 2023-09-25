@@ -12,7 +12,7 @@ export class TasKListComponent implements OnInit{
    constructor(private service:ToDoService){}
 
   ngOnInit(): void {
-      console.log(' ngOnInit called TaskList');
+      // console.log(' ngOnInit called TaskList');
       this.getTaskList();
   }
 
@@ -21,7 +21,7 @@ export class TasKListComponent implements OnInit{
   getTaskList(){
     this.service.getAllTask().subscribe({
       next : res=>{
-        console.log('getTaskList called ');
+        // console.log('getTaskList called '+JSON.stringify(res));
         this.taskList=res;       
       }
     });
@@ -30,7 +30,7 @@ export class TasKListComponent implements OnInit{
   deleteTask(id:number){
     this.service.deleteTask(id).subscribe({
       next : res=> {
-        console.log(' deleted '+res)
+        // console.log(' deleted '+JSON.stringify(res))
         this.getTaskList()
       }
     });
@@ -39,19 +39,9 @@ export class TasKListComponent implements OnInit{
   filterTaskList(data:string){
     this.service.searchTask(data).subscribe({
       next : res=>{
-        console.log('filterTaskList called '+res.length);
+        // console.log('filterTaskList called '+JSON.stringify(res));
         this.taskList=res;       
       }
     });
   }
-
-  // filterTaskList(title:string):void{
-  //   console.log(' filterTaskList '+title);
-  //   this.service.searchTask(title).subscribe({
-  //     next : res=>{
-  //       console.log('filterTaskList called res '+res.length);
-  //       this.taskList=res;       
-  //     }
-  //   });
-  // }
 }

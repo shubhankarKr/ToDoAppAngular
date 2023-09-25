@@ -15,7 +15,9 @@ export class ToDoService {
     .pipe(retry(1),catchError(this.handleError) ) ;
   }
 
-  updateTask(task : toDoTaskModel):Observable<toDoTaskModel>{
+  updateTask(task : any):Observable<toDoTaskModel>{
+    console.log('update service '+JSON.stringify(task));
+    
     return this.http.put<toDoTaskModel>('http://localhost:8000/task/update',task).pipe(
       retry(1),catchError(this.handleError)
     );
@@ -28,7 +30,7 @@ export class ToDoService {
     );
   }
 
-  addTask(task : toDoTaskModel):Observable<toDoTaskModel>{
+  addTask(task : any):Observable<toDoTaskModel>{
     return this.http.post<toDoTaskModel>('http://localhost:8000/task/add',task).pipe(
       retry(1),catchError(this.handleError)
     );
@@ -39,6 +41,15 @@ export class ToDoService {
     return this.http.get<toDoTaskModel[]>(url)
     .pipe(retry(1),catchError(this.handleError) ) ;
   }
+
+  getTaskById(id:number):Observable<toDoTaskModel>{
+    console.log(' service called ');
+    
+    let url = `http://localhost:8000/task/${id}`;
+    return this.http.get<toDoTaskModel>(url)
+    .pipe(retry(1),catchError(this.handleError) ) ;
+  }
+
   private handleError(err: any): Observable<any> {
    console.log(JSON.stringify(err));
    return throwError( () => {
