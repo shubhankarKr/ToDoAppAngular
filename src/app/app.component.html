@@ -12,14 +12,14 @@
         </ul>
         <form class="d-flex">
           <input class="form-control me-2" type="search" #inputString (input)="filter(inputString.value)" placeholder="Search" aria-label="Search">
-          <button class="btn btn-info" type="submit" >Search</button>
+          <!-- <button class="btn btn-info" type="submit" >Search</button> -->
         </form>
       </div>
     </div>
  </nav>
  <br>
  <div class="container">
-    <div class="row justify-content-md-center" >
+    <div class="row" >
       <div class="col">
         <router-outlet></router-outlet>
       </div>

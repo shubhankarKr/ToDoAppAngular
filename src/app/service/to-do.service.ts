@@ -43,11 +43,21 @@ export class ToDoService {
   }
 
   getTaskById(id:number):Observable<toDoTaskModel>{
-    console.log(' service called ');
-    
     let url = `http://localhost:8000/task/${id}`;
     return this.http.get<toDoTaskModel>(url)
     .pipe(retry(1),catchError(this.handleError) ) ;
+  }
+
+  getColorData():Observable<any[]>{
+    let url = `http://localhost:8000/task/getColorMD`;
+    return this.http.get<toDoTaskModel>(url)
+    .pipe(retry(1),catchError(this.handleError) ) ;
+  }
+  updateColor(data:any):Observable<any>{
+    let url=`http://localhost:8000/task/updateColor`;
+    return this.http.put<any>(url,data).pipe(
+      retry(1),catchError(this.handleError)
+    )
   }
 
   private handleError(err: any): Observable<any> {

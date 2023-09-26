@@ -4,5 +4,5 @@ export class toDoTaskModel{
     lastUpdatedDate!:Date;
 	desciption!:string;
 	title!:string;
-	colourCode!:string;
+	colour!:{colorCode:string,colorId:number}
 }
