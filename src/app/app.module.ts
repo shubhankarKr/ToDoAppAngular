@@ -8,14 +8,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule , ReactiveFormsModule } from '@angular/forms';
 import { AddTaskComponent } from './add-task/add-task.component';
 import { TasKListComponent } from './task-list/task-list.component';
-import { FormControlPipe } from './form-control.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     AddTaskComponent,
     TasKListComponent,
-    FormControlPipe,
   ],
   imports: [
     BrowserModule,
