@@ -46,7 +46,11 @@ export class AddTaskComponent {
           this.response=res
           this.addTaskForm.controls['title'].setValue(res.title)
           this.addTaskForm.controls['description'].setValue(res.desciption)
-          this.addTaskForm.controls['lastUpdatedDate'].setValue(formatDate(res.lastUpdatedDate,'dd-MM-yyyy, h:mm a',this.locale))
+          if(res.lastUpdatedDate){
+            this.addTaskForm.controls['lastUpdatedDate'].setValue(formatDate(res.lastUpdatedDate,'dd-MM-yyyy, h:mm a',this.locale))
+          }else{
+            this.addTaskForm.controls['lastUpdatedDate'].setValue('NA')
+          }
           this.addTaskForm.controls['createdDate'].setValue(formatDate(res.createdDate,'dd-MM-yyyy, h:mm a',this.locale))
       }  })
     }else if(this.mode =='view'){
