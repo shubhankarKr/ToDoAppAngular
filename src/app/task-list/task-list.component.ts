@@ -60,10 +60,10 @@ export class TasKListComponent implements OnInit{
   }
 
   getColorData(){
-    this.service.getColorData().subscribe({
-      next: res=>{
-        this.colorData=res
-      }
-    })
+    // this.service.getColorData().subscribe({
+    //   next: res=>{
+    //     this.colorData=res
+    //   }
+    // })
   }
 }

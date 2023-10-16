@@ -1,7 +1,8 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse,HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, map, retry, tap, throwError } from 'rxjs';
 import { toDoTaskModel } from '../model/ToDoTaskModel';
+import { User } from '../model/User';
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +12,8 @@ export class ToDoService {
   constructor(private http:HttpClient) { }
 
   getAllTask():Observable<toDoTaskModel[]>{
-    return this.http.get<toDoTaskModel[]>('http://localhost:8000/task/getAllTasks')
-    .pipe(retry(1),catchError(this.handleError) ) ;
+    return this.http.get<toDoTaskModel[]>('http://localhost:8000/task/getAllTasks',{withCredentials:true})
+    .pipe(catchError(this.handleError) ) ;
   }
 
   updateTask(task : any):Observable<toDoTaskModel>{
@@ -60,10 +61,40 @@ export class ToDoService {
     )
   }
 
-  private handleError(err: any): Observable<any> {
-   console.log(JSON.stringify(err));
-   return throwError( () => {
-    return 'Error Has occured';
-   } );
+  registerUser(data:any):Observable<any>{
+    let url=`http://localhost:8000/user/register`;
+    return this.http.post<any>(url,data).pipe(
+      retry(1),catchError(this.handleError)
+    )
+  }
+
+  userLogin(user:User){
+    console.log('user login called');
+    
+    let url=`http://localhost:8000/user/login`;
+    let httpHeaders = new HttpHeaders();
+    // headersValue.set('userData',JSON.stringify(user));
+     httpHeaders = httpHeaders.append('Authorization', 'Basic ' + window.btoa(user.userName + ':' + user.password));
+    console.log('Authorization service '+httpHeaders.get('Authorization'));
+    // console.log('userData service '+httpHeaders.get('userData'));
+    
+    return this.http.get<User>(url,{headers:httpHeaders,withCredentials:true}).pipe(
+      catchError(this.handleError)
+    )
+  }
+
+  private handleError(err: HttpErrorResponse ): Observable<any> {
+    // console.log(err.error);
+    
+    console.log(err);
+    if(err.message){
+      return throwError( () => {
+        return err.message;
+       } );
+    }else{
+      return throwError( () => {
+        return 'Error Has occured in APIService';
+       } );
+    }
   }
 }

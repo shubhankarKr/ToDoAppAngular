@@ -30,6 +30,7 @@ export class AddTaskComponent {
     }else{
       this.mode='add'
     }
+    console.log('mode value '+this.mode);
 
      this.addTaskForm=this.fb.group({
       title : [{value :'',disabled : this.mode =='view'},Validators.required],
@@ -45,7 +46,7 @@ export class AddTaskComponent {
         next: (res)=>{
           this.response=res
           this.addTaskForm.controls['title'].setValue(res.title)
-          this.addTaskForm.controls['description'].setValue(res.desciption)
+          this.addTaskForm.controls['description'].setValue(res.description)
           if(res.lastUpdatedDate){
             this.addTaskForm.controls['lastUpdatedDate'].setValue(formatDate(res.lastUpdatedDate,'dd-MM-yyyy, h:mm a',this.locale))
           }else{
@@ -59,7 +60,7 @@ export class AddTaskComponent {
           this.response=res
           this.addTaskForm.controls['title'].setValue(res.title)
           this.addTaskForm.controls['id'].setValue(res.id)
-          this.addTaskForm.controls['description'].setValue(res.desciption)
+          this.addTaskForm.controls['description'].setValue(res.description)
           this.addTaskForm.controls['lastUpdatedDate'].setValue(formatDate(res.lastUpdatedDate,'dd-MM-yyyy, h:mm a',this.locale))
           this.addTaskForm.controls['createdDate'].setValue(formatDate(res.createdDate,'dd-MM-yyyy, h:mm a',this.locale))
           this.addTaskForm.controls['colorCode'].setValue(res.colour.colorCode)
@@ -70,7 +71,7 @@ export class AddTaskComponent {
 
   saveTask(){
     let modelToSave={
-      desciption:this.addTaskForm.get('description')?.value,
+      description:this.addTaskForm.get('description')?.value,
       title:this.addTaskForm.get('title')?.value,
       colourCode:this.addTaskForm.get('colourCode')?.value
     }
@@ -84,7 +85,7 @@ export class AddTaskComponent {
   updateTask(){
     let modelToUpdate={
       id:this.activedRoute.snapshot.params['id'],
-      desciption:this.addTaskForm.get('description')?.value,
+      description:this.addTaskForm.get('description')?.value,
       title:this.addTaskForm.get('title')?.value,
       colourCode:this.addTaskForm.get('colourCode')?.value,
     }
